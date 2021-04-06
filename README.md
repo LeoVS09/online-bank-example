@@ -11,7 +11,8 @@ Service implement three layer architecture for show all pluses and minuses of th
 ## Use Cases
 
 Service implement use cases:
-* Transfer of money - allow one user send money to other user
+* Allow user send money to other user
+* Allow admin transfer money between users
 
 ## Development
 
