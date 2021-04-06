@@ -1,6 +1,9 @@
 #!/usr/bin/env make
 
-.PHONY: start
+.PHONY: start clear
 
 start:
 	docker-compose up --force-recreate
+
+clear:
+	docker-compose down
