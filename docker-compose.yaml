@@ -1,0 +1,22 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres:13.2-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: bank
+    ports:
+      - 5432:5432
+    network_mode: host
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    network_mode: host
