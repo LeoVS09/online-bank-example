@@ -46,4 +46,8 @@ public class TransactionService {
         }
 
     }
+
+    public UserRepository getUserRepository(){
+        return this.userRepository;
+    }
 }
