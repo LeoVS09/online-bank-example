@@ -1,19 +1,19 @@
 package com.architecture.example.bank.infrastructure;
 
 import com.architecture.example.bank.infrastructure.entities.User;
-import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import java.sql.Connection;
+import javax.persistence.Persistence;
 
 public class UserRepository  {
 
     private EntityManager entityManager;
 
-    public UserRepository(EntityManager entityManager) {
-        // Create repository specific entity manager
-        this.entityManager = entityManager.getEntityManagerFactory().createEntityManager();
+    public UserRepository() {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory( "postgres" );
+        this.entityManager = entityManagerFactory.createEntityManager();
     }
 
     public User findById(Long id) {

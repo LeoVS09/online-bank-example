@@ -4,15 +4,13 @@ import com.architecture.example.bank.logic.TransactionException;
 import com.architecture.example.bank.logic.TransactionService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-
 @RestController
 public class ApiController {
 
     private TransactionService transactionService;
 
-    public ApiController(EntityManager entityManager) {
-        this.transactionService = new TransactionService(entityManager);
+    public ApiController() {
+        this.transactionService = new TransactionService();
     }
 
     @GetMapping("/send-money/{to}/{amount}")

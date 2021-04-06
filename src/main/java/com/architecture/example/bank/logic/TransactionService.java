@@ -10,8 +10,8 @@ public class TransactionService {
 
     private UserRepository userRepository;
 
-    public TransactionService(EntityManager entityManager){
-        this.userRepository = new UserRepository(entityManager);
+    public TransactionService(){
+        this.userRepository = new UserRepository();
     }
 
     public double sendMoney(Long from, Long to, double amount) throws TransactionException {
