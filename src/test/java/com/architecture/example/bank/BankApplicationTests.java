@@ -18,13 +18,13 @@ class BankApplicationTests {
         Long sourceId = 1L;
         Long targetId = 2L;
 
-        repository.findById(sourceId).setBalance(1000);
-        repository.findById(targetId).setBalance(1000);
+        repository.findById(sourceId).getAccount().setBalance(1000);
+        repository.findById(targetId).getAccount().setBalance(1000);
 
         service.sendMoney(sourceId, targetId, 200);
 
-        Assertions.assertEquals(repository.findById(sourceId).getBalance(), 800);
-        Assertions.assertEquals(repository.findById(targetId).getBalance(), 1200);
+        Assertions.assertEquals(repository.findById(sourceId).getAccount().getBalance(), 800);
+        Assertions.assertEquals(repository.findById(targetId).getAccount().getBalance(), 1200);
     }
 
 }

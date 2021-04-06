@@ -1,10 +1,18 @@
-Create table Bank_User (
-  ID Bigint not null,
-  Name Varchar(128) not null,
-  Balance real not null,
-  CONSTRAINT Bank_User_pk PRIMARY KEY (ID)
+create table Bank_Account (
+    ID      Bigint primary key,
+    Balance real   not null
 );
 
-Insert into Bank_User(ID, Name, Balance) values (1, 'Tom', 1000);
-Insert into Bank_User(ID, Name, Balance) values (2, 'Jerry', 2000);
-Insert into Bank_User(ID, Name, Balance) values (3, 'Donald', 3000);
+insert into Bank_Account(ID, Balance) values (1, 1000);
+insert into Bank_Account(ID, Balance) values (2, 2000);
+insert into Bank_Account(ID, Balance) values (3, 3000);
+
+create table Bank_User (
+  ID Bigint primary key,
+  Name Varchar(128) not null,
+  Account_id Bigint not null references Bank_Account
+);
+
+insert into Bank_User(ID, Name, Account_id) values (1, 'Tom', 1);
+insert into Bank_User(ID, Name, Account_id) values (2, 'Jerry', 2);
+insert into Bank_User(ID, Name, Account_id) values (3, 'Donald', 3);

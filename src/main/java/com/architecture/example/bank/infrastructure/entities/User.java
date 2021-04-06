@@ -14,8 +14,9 @@ public class User {
     @Column(name = "Name", length = 128, nullable = false)
     private String name;
 
-    @Column(name = "Balance", nullable = false)
-    private double balance;
+    @ManyToOne
+    @JoinColumn(name="Account_id")
+    private Account account;
 
     public Long getId() {
         return id;
@@ -33,11 +34,11 @@ public class User {
         this.name = name;
     }
 
-    public double getBalance() {
-        return balance;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

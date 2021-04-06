@@ -6,6 +6,7 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <!-- Annotated entity classes -->
         <class>com.architecture.example.bank.infrastructure.entities.User</class>
+        <class>com.architecture.example.bank.infrastructure.entities.Account</class>
         <properties>
 
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/bank" />

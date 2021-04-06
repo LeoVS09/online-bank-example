@@ -14,6 +14,10 @@ Service implement use cases:
 * Allow user send money to other user
 * Allow admin transfer money between users
 
+## Changelog
+
+* User with balance were split to account and user, for allow multiple users have one corporate account 
+
 ## Development
 
 1) clone repository

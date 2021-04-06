@@ -1,6 +1,7 @@
 package com.architecture.example.bank.logic;
 
 import com.architecture.example.bank.infrastructure.UserRepository;
+import com.architecture.example.bank.infrastructure.entities.Account;
 import com.architecture.example.bank.infrastructure.entities.User;
 
 import javax.persistence.EntityManager;
@@ -21,18 +22,18 @@ public class TransactionService {
             User source = this.userRepository.findById(from);
             User target = this.userRepository.findById(to);
 
-            double newSourceBalance = source.getBalance() - amount;
+            double newSourceBalance = source.getAccount().getBalance() - amount;
             if (newSourceBalance < 0 ) {
                 throw new TransactionException("Not enough money");
             }
 
-            double newDestinationBalance = target.getBalance() + amount;
+            double newDestinationBalance = target.getAccount().getBalance() + amount;
 
             transaction = this.userRepository.getTransaction();
             transaction.begin();
 
-            source.setBalance(newSourceBalance);
-            target.setBalance(newDestinationBalance);
+            source.getAccount().setBalance(newSourceBalance);
+            target.getAccount().setBalance(newDestinationBalance);
 
             transaction.commit();
 
