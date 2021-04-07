@@ -1,4 +1,4 @@
-package com.architecture.example.bank.domain;
+package com.architecture.example.bank.entity;
 
 public class TransactionException extends Exception {
     private static final long serialVersionUID = -3128681006635769411L;

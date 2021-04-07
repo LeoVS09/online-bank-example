@@ -1,10 +1,10 @@
-package com.architecture.example.bank.infrastructure.entities;
+package com.architecture.example.bank.boundaries.entities;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Bank_User")
-public class User extends com.architecture.example.bank.domain.Account {
+public class User extends com.architecture.example.bank.entity.Account {
 
     @Id
     @GeneratedValue

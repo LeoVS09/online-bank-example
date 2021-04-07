@@ -1,8 +1,7 @@
-package com.architecture.example.bank.application;
+package com.architecture.example.bank.interactors;
 
-import com.architecture.example.bank.domain.Account;
-import com.architecture.example.bank.domain.TransactionException;
-import com.architecture.example.bank.services.TransferService;
+import com.architecture.example.bank.entity.Account;
+import com.architecture.example.bank.entity.TransactionException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityTransaction;
@@ -12,11 +11,8 @@ public class TransactionService {
 
     private AccountRepository accountRepository;
 
-    private TransferService transferService;
-
-    public TransactionService(AccountRepository accountRepository, TransferService transferService) {
+    public TransactionService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
-        this.transferService = transferService;
     }
 
     public double sendMoney(Long from, Long to, double amount) throws TransactionException {
@@ -29,11 +25,12 @@ public class TransactionService {
             transaction = this.accountRepository.getTransaction();
             transaction.begin();
 
-            double result = this.transferService.transferMoney(source, target, amount);
+            source.credit(amount);
+            target.debit(amount);
 
             transaction.commit();
 
-            return result;
+            return source.getBalance();
 
         } catch (Throwable e) {
             if( transaction != null) {

@@ -1,10 +1,9 @@
 package com.architecture.example.bank;
 
-import com.architecture.example.bank.application.AccountRepository;
-import com.architecture.example.bank.domain.Account;
-import com.architecture.example.bank.domain.TransactionException;
-import com.architecture.example.bank.application.TransactionService;
-import com.architecture.example.bank.services.TransferService;
+import com.architecture.example.bank.interactors.AccountRepository;
+import com.architecture.example.bank.entity.Account;
+import com.architecture.example.bank.entity.TransactionException;
+import com.architecture.example.bank.interactors.TransactionService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +17,7 @@ class BankApplicationTests {
     @Test
     void sendMoneyWork() throws TransactionException {
         AccountRepository repository = new UserMockRepository();
-        TransactionService service = new TransactionService(repository, new TransferService());
+        TransactionService service = new TransactionService(repository);
 
         Long sourceId = 1L;
         Long targetId = 2L;

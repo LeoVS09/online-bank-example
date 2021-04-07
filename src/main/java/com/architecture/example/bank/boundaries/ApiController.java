@@ -1,7 +1,7 @@
-package com.architecture.example.bank.presenter;
+package com.architecture.example.bank.boundaries;
 
-import com.architecture.example.bank.domain.TransactionException;
-import com.architecture.example.bank.application.TransactionService;
+import com.architecture.example.bank.entity.TransactionException;
+import com.architecture.example.bank.interactors.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

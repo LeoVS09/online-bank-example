@@ -1,7 +1,7 @@
-package com.architecture.example.bank.infrastructure;
+package com.architecture.example.bank.boundaries;
 
-import com.architecture.example.bank.application.AccountRepository;
-import com.architecture.example.bank.infrastructure.entities.User;
+import com.architecture.example.bank.interactors.AccountRepository;
+import com.architecture.example.bank.boundaries.entities.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

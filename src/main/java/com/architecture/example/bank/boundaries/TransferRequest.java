@@ -1,4 +1,4 @@
-package com.architecture.example.bank.presenter;
+package com.architecture.example.bank.boundaries;
 
 public class TransferRequest {
 

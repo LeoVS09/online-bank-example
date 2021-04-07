@@ -1,4 +1,4 @@
-package com.architecture.example.bank.domain;
+package com.architecture.example.bank.entity;
 
 public abstract class Account {
 
