@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Bank_User")
-public class User extends com.architecture.example.bank.data.User {
+public class User implements com.architecture.example.bank.data.User {
 
     @Id
     @GeneratedValue

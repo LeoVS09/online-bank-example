@@ -1,17 +1,9 @@
 package com.architecture.example.bank.data;
 
-import com.architecture.example.bank.domain.TransactionException;
+public interface User {
 
-public abstract class User {
+    Long getId();
 
-    abstract public double getBalance();
-    abstract public void setBalance(double amount);
-
-    // increase balance
-    public void debit(double amount) {
-        this.setBalance(this.getBalance() + amount);
-    }
-
-
-
+    double getBalance();
+    void setBalance(double amount);
 }

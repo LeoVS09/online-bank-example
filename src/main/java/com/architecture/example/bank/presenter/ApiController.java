@@ -1,5 +1,6 @@
 package com.architecture.example.bank.presenter;
 
+import com.architecture.example.bank.contexts.bill.BillContext;
 import com.architecture.example.bank.contexts.transfer.TransferContext;
 import com.architecture.example.bank.domain.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,9 @@ public class ApiController {
     @Autowired
     private TransferContext transferContext;
 
+    @Autowired
+    private BillContext billContext;
+
     @GetMapping("/send-money/{to}/{amount}")
     public Double sendMoney(@RequestHeader("x-user-id") Long from, @PathVariable Long to, @PathVariable double amount) throws TransactionException {
         return this.transferContext.sendMoney(from, to, amount);
@@ -19,5 +23,10 @@ public class ApiController {
     @PostMapping("/transfer-between")
     public Double transferBetween(@RequestBody TransferRequest request) throws TransactionException {
         return this.transferContext.sendMoney(request.getFrom(), request.getTo(), request.getAmount());
+    }
+
+    @PostMapping("/make-bill")
+    public void makeBill(@RequestBody TransferRequest request) {
+        this.billContext.makeBill(request.getFrom(), request.getTo(), request.getAmount());
     }
 }
