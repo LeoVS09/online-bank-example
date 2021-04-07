@@ -1,7 +1,7 @@
 package com.architecture.example.bank.presenter;
 
 import com.architecture.example.bank.domain.TransactionException;
-import com.architecture.example.bank.application.TransferService;
+import com.architecture.example.bank.application.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class ApiController {
 
     @Autowired
-    private TransferService transactionService;
+    private TransactionService transactionService;
 
     @GetMapping("/send-money/{to}/{amount}")
     public Double sendMoney(@RequestHeader("x-user-id") Long from, @PathVariable Long to, @PathVariable double amount) throws TransactionException {

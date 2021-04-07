@@ -6,7 +6,7 @@ Example of online banking service on different architectures
 
 Simplified onion architecture
 
-Service implements onion architecture, but with fewer layers. 
+Service implements onion architecture. 
 Current architecture showed with all pluses and minuses.
 
 ## Use Cases

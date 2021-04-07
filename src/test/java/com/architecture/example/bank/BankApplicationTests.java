@@ -1,9 +1,11 @@
 package com.architecture.example.bank;
 
+import com.architecture.example.bank.application.User;
 import com.architecture.example.bank.domain.Account;
-import com.architecture.example.bank.application.AccountRepository;
+import com.architecture.example.bank.application.UserRepository;
 import com.architecture.example.bank.domain.TransactionException;
-import com.architecture.example.bank.application.TransferService;
+import com.architecture.example.bank.application.TransactionService;
+import com.architecture.example.bank.services.TransferService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,8 +18,8 @@ class BankApplicationTests {
 
     @Test
     void sendMoneyWork() throws TransactionException {
-        AccountRepository repository = new AccountMockRepository();
-        TransferService service = new TransferService(repository);
+        UserRepository repository = new UserMockRepository();
+        TransactionService service = new TransactionService(repository, new TransferService());
 
         Long sourceId = 1L;
         Long targetId = 2L;
@@ -28,17 +30,17 @@ class BankApplicationTests {
         Assertions.assertEquals(repository.findById(targetId).getBalance(), 1200);
     }
 
-    private class AccountMockRepository implements AccountRepository {
+    private class UserMockRepository implements UserRepository {
 
-        private HashMap<Long, Account> map = new HashMap<Long, Account>();
+        private HashMap<Long, UserMock> map = new HashMap<Long, UserMock>();
 
-        public AccountMockRepository(){
-            this.map.put(1L, new AccountMock(1000));
-            this.map.put(2L, new AccountMock(1000));
+        public UserMockRepository(){
+            this.map.put(1L, new UserMock(1000));
+            this.map.put(2L, new UserMock(1000));
         }
 
         @Override
-        public Account findById(Long id) {
+        public User findById(Long id) {
             return this.map.get(id);
         }
 
@@ -69,11 +71,12 @@ class BankApplicationTests {
             };
         }
 
-        private class AccountMock extends Account {
+        private class UserMock extends User {
 
             private double balance;
+            private String name;
 
-            public AccountMock(double balance) {
+            public UserMock(double balance) {
                 this.balance = balance;
             }
 
@@ -85,6 +88,16 @@ class BankApplicationTests {
             @Override
             public void setBalance(double amount) {
                 this.balance = amount;
+            }
+
+            @Override
+            public String getName() {
+                return this.name;
+            }
+
+            @Override
+            public void setName(String name) {
+                this.name = name;
             }
         }
     }
