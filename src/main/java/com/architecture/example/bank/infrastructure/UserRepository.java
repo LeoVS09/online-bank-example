@@ -1,6 +1,5 @@
 package com.architecture.example.bank.infrastructure;
 
-import com.architecture.example.bank.application.AccountRepository;
 import com.architecture.example.bank.infrastructure.entities.User;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 @Repository
-public class UserRepository implements AccountRepository {
+public class UserRepository {
 
     private EntityManager entityManager;
 
