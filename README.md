@@ -6,7 +6,7 @@ Example of online banking service on different architectures
 
 Simplified onion architecture
 
-Service implements onion architecture. 
+Service implements hexagonal architecture. 
 Current architecture showed with all pluses and minuses.
 
 ## Use Cases

@@ -4,9 +4,9 @@ import com.architecture.example.bank.domain.Account;
 
 import javax.persistence.EntityTransaction;
 
-public interface UserRepository {
+public interface AccountRepository {
 
-    User findById(Long id);
+    Account findById(Long id);
 
     EntityTransaction getTransaction();
 }

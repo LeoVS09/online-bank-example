@@ -1,8 +1,7 @@
 package com.architecture.example.bank;
 
-import com.architecture.example.bank.application.User;
+import com.architecture.example.bank.application.AccountRepository;
 import com.architecture.example.bank.domain.Account;
-import com.architecture.example.bank.application.UserRepository;
 import com.architecture.example.bank.domain.TransactionException;
 import com.architecture.example.bank.application.TransactionService;
 import com.architecture.example.bank.services.TransferService;
@@ -18,7 +17,7 @@ class BankApplicationTests {
 
     @Test
     void sendMoneyWork() throws TransactionException {
-        UserRepository repository = new UserMockRepository();
+        AccountRepository repository = new UserMockRepository();
         TransactionService service = new TransactionService(repository, new TransferService());
 
         Long sourceId = 1L;
@@ -30,17 +29,17 @@ class BankApplicationTests {
         Assertions.assertEquals(repository.findById(targetId).getBalance(), 1200);
     }
 
-    private class UserMockRepository implements UserRepository {
+    private class UserMockRepository implements AccountRepository {
 
-        private HashMap<Long, UserMock> map = new HashMap<Long, UserMock>();
+        private HashMap<Long, Account> map = new HashMap<Long, Account>();
 
         public UserMockRepository(){
-            this.map.put(1L, new UserMock(1000));
-            this.map.put(2L, new UserMock(1000));
+            this.map.put(1L, new AccountMock(1000));
+            this.map.put(2L, new AccountMock(1000));
         }
 
         @Override
-        public User findById(Long id) {
+        public Account findById(Long id) {
             return this.map.get(id);
         }
 
@@ -71,12 +70,11 @@ class BankApplicationTests {
             };
         }
 
-        private class UserMock extends User {
+        private class AccountMock extends Account {
 
             private double balance;
-            private String name;
 
-            public UserMock(double balance) {
+            public AccountMock(double balance) {
                 this.balance = balance;
             }
 
@@ -88,16 +86,6 @@ class BankApplicationTests {
             @Override
             public void setBalance(double amount) {
                 this.balance = amount;
-            }
-
-            @Override
-            public String getName() {
-                return this.name;
-            }
-
-            @Override
-            public void setName(String name) {
-                this.name = name;
             }
         }
     }
