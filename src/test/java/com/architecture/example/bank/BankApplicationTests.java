@@ -1,25 +1,27 @@
 package com.architecture.example.bank;
 
+import com.architecture.example.bank.domain.Account;
+import com.architecture.example.bank.domain.AccountRepository;
 import com.architecture.example.bank.infrastructure.UserRepository;
-import com.architecture.example.bank.logic.TransactionException;
-import com.architecture.example.bank.logic.TransactionService;
+import com.architecture.example.bank.domain.TransactionException;
+import com.architecture.example.bank.domain.TransferService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.persistence.EntityTransaction;
+import java.util.HashMap;
 
 @SpringBootTest
 class BankApplicationTests {
 
     @Test
     void sendMoneyWork() throws TransactionException {
-        TransactionService service = new TransactionService();
-        UserRepository repository = service.getUserRepository();
+        AccountRepository repository = new AccountMockRepository();
+        TransferService service = new TransferService(repository);
 
         Long sourceId = 1L;
         Long targetId = 2L;
-
-        repository.findById(sourceId).setBalance(1000);
-        repository.findById(targetId).setBalance(1000);
 
         service.sendMoney(sourceId, targetId, 200);
 
@@ -27,4 +29,67 @@ class BankApplicationTests {
         Assertions.assertEquals(repository.findById(targetId).getBalance(), 1200);
     }
 
+    private class AccountMockRepository implements AccountRepository {
+
+        private HashMap<Long, Account> map = new HashMap<Long, Account>();
+
+        public AccountMockRepository(){
+            this.map.put(1L, new AccountMock(1000));
+            this.map.put(2L, new AccountMock(1000));
+        }
+
+        @Override
+        public Account findById(Long id) {
+            return this.map.get(id);
+        }
+
+        @Override
+        public EntityTransaction getTransaction() {
+            return new EntityTransaction() {
+                @Override
+                public void begin() {}
+
+                @Override
+                public void commit() {}
+
+                @Override
+                public void rollback() {}
+
+                @Override
+                public void setRollbackOnly() {}
+
+                @Override
+                public boolean getRollbackOnly() {
+                    return false;
+                }
+
+                @Override
+                public boolean isActive() {
+                    return false;
+                }
+            };
+        }
+
+        private class AccountMock extends Account {
+
+            private double balance;
+
+            public AccountMock(double balance) {
+                this.balance = balance;
+            }
+
+            @Override
+            public double getBalance() {
+                return this.balance;
+            }
+
+            @Override
+            public void setBalance(double amount) {
+                this.balance = amount;
+            }
+        }
+    }
+
 }
+
+

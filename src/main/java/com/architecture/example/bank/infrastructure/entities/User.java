@@ -1,10 +1,12 @@
 package com.architecture.example.bank.infrastructure.entities;
 
+import com.architecture.example.bank.domain.Account;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Bank_User")
-public class User {
+public class User extends Account {
 
     @Id
     @GeneratedValue

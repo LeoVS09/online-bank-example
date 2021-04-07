@@ -4,9 +4,10 @@ Example of online banking service on different architectures
 
 ## Current Architecture
 
-Three layer / three tier architecture
+Simplified onion architecture
 
-Service implement three layer architecture for show all pluses and minuses of this architecture
+Service implements onion architecture, but with fewer layers. 
+Current architecture showed with all pluses and minuses.
 
 ## Use Cases
 
