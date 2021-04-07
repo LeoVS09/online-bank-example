@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 @Repository
-public class UserRepository implements AccountRepository {
+public class UserRepository {
 
     private EntityManager entityManager;
 
