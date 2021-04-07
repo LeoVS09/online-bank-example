@@ -1,6 +1,6 @@
 package com.architecture.example.bank.infrastructure;
 
-import com.architecture.example.bank.domain.AccountRepository;
+import com.architecture.example.bank.application.AccountRepository;
 import com.architecture.example.bank.infrastructure.entities.User;
 import org.springframework.stereotype.Repository;
 

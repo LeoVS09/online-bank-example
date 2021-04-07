@@ -1,10 +1,9 @@
 package com.architecture.example.bank;
 
 import com.architecture.example.bank.domain.Account;
-import com.architecture.example.bank.domain.AccountRepository;
-import com.architecture.example.bank.infrastructure.UserRepository;
+import com.architecture.example.bank.application.AccountRepository;
 import com.architecture.example.bank.domain.TransactionException;
-import com.architecture.example.bank.domain.TransferService;
+import com.architecture.example.bank.application.TransferService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

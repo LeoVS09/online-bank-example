@@ -1,4 +1,6 @@
-package com.architecture.example.bank.domain;
+package com.architecture.example.bank.application;
+
+import com.architecture.example.bank.domain.Account;
 
 import javax.persistence.EntityTransaction;
 

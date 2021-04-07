@@ -1,7 +1,8 @@
-package com.architecture.example.bank.domain;
+package com.architecture.example.bank.application;
 
-import com.architecture.example.bank.infrastructure.UserRepository;
-import com.architecture.example.bank.infrastructure.entities.User;
+import com.architecture.example.bank.application.AccountRepository;
+import com.architecture.example.bank.domain.Account;
+import com.architecture.example.bank.domain.TransactionException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityTransaction;
