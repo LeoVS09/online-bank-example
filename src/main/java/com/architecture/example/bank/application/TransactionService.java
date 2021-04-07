@@ -10,12 +10,12 @@ import javax.persistence.EntityTransaction;
 @Service
 public class TransactionService {
 
-    private UserRepository accountRepository;
+    private UserRepository userRepository;
 
     private TransferService transferService;
 
-    public TransactionService(UserRepository accountRepository, TransferService transferService) {
-        this.accountRepository = accountRepository;
+    public TransactionService(UserRepository userRepository, TransferService transferService) {
+        this.userRepository = userRepository;
         this.transferService = transferService;
     }
 
@@ -23,13 +23,13 @@ public class TransactionService {
         EntityTransaction transaction = null;
 
         try {
-            User source = this.accountRepository.findById(from);
-            User target = this.accountRepository.findById(to);
+            User source = this.userRepository.findById(from);
+            User target = this.userRepository.findById(to);
 
-            transaction = this.accountRepository.getTransaction();
+            transaction = this.userRepository.getTransaction();
             transaction.begin();
 
-            double result = this.transferService.transferMoney(source, target, amount);
+            double result = this.transferService.transferMoney(source.getAccount(), target.getAccount(), amount);
 
             transaction.commit();
 

@@ -26,8 +26,8 @@ class BankApplicationTests {
 
         service.sendMoney(sourceId, targetId, 200);
 
-        Assertions.assertEquals(repository.findById(sourceId).getBalance(), 800);
-        Assertions.assertEquals(repository.findById(targetId).getBalance(), 1200);
+        Assertions.assertEquals(repository.findById(sourceId).getAccount().getBalance(), 800);
+        Assertions.assertEquals(repository.findById(targetId).getAccount().getBalance(), 1200);
     }
 
     private class UserMockRepository implements UserRepository {
@@ -73,10 +73,34 @@ class BankApplicationTests {
 
         private class UserMock extends User {
 
-            private double balance;
+            private Account account;
             private String name;
 
             public UserMock(double balance) {
+                this.account = new AccountMock(balance);
+            }
+
+            @Override
+            public String getName() {
+                return this.name;
+            }
+
+            @Override
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            @Override
+            public Account getAccount() {
+                return account;
+            }
+        }
+
+        private class AccountMock extends Account {
+
+            private double balance;
+
+            public AccountMock(double balance) {
                 this.balance = balance;
             }
 
@@ -88,16 +112,6 @@ class BankApplicationTests {
             @Override
             public void setBalance(double amount) {
                 this.balance = amount;
-            }
-
-            @Override
-            public String getName() {
-                return this.name;
-            }
-
-            @Override
-            public void setName(String name) {
-                this.name = name;
             }
         }
     }
